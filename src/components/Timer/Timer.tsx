@@ -81,9 +81,7 @@ const Timer = ({
   return (
     <Wrapper>
       <TimerName>
-        This is timer number
-        {' '}
-        {timerId}
+        {`This is timer #${timerId}`}
       </TimerName>
       <TimerValue>
         {getValueToDisplay()}
