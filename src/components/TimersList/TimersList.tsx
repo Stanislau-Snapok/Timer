@@ -5,8 +5,11 @@ import {
 } from "react";
 
 import Timer from "../Timer";
-
-import './TimersList.css';
+import {
+  Container,
+  AddTimerButton,
+  TimersWrapper,
+} from "./TimerList.styled";
 
 const TimersList = () => {
   const counter = useRef<number>(1);
@@ -23,14 +26,14 @@ const TimersList = () => {
   }, [])
 
   return (
-    <div className='container'>
-      <button
+    <Container>
+      <AddTimerButton
         onClick={handleTimerAdd}
         className="addTimerButton"
       >
         Add timer
-      </button>
-      <div className="timersWrapper">
+      </AddTimerButton>
+      <TimersWrapper>
         {timers.map((id) => (
           <Timer
             key={id}
@@ -38,8 +41,8 @@ const TimersList = () => {
             timerId={id}
           />
         ))}
-      </div>
-    </div>
+      </TimersWrapper>
+    </Container>
   );
 }
 
