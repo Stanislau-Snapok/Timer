@@ -1,24 +1,24 @@
-import {
+import React, {
   useCallback,
   useEffect,
   useRef,
   useState,
-} from "react";
+} from 'react';
 
-import { convertTimeToString } from "../../utils";
+import { convertTimeToString } from '../../utils';
 import {
   Wrapper,
   TimerName,
   TimerValue,
   ButtonsWrapper,
-} from "./Timer.styled";
+} from './Timer.styled';
 
-interface iTimer {
+interface ITimer {
   onTimerDelete: (event: React.MouseEvent) => void,
   timerId: number,
 }
 
-interface iTime {
+interface ITime {
   startTime: number,
   elapsedTime: number,
   currentTime: number,
@@ -27,14 +27,14 @@ interface iTime {
 const Timer = ({
   onTimerDelete,
   timerId,
-}: iTimer) => {
+}: ITimer) => {
   const interval = useRef<ReturnType<typeof setInterval> | null>();
   const [isStarted, setIsStarted] = useState(false);
-  const [time, setTime] = useState<iTime>({
+  const [time, setTime] = useState<ITime>({
     startTime: 0,
     elapsedTime: 0,
     currentTime: 0,
-  })
+  });
 
   const handleTimerStateToogle = useCallback(
     () => setIsStarted((currentTimerState) => !currentTimerState),
@@ -48,10 +48,12 @@ const Timer = ({
       startTime: now,
       elapsedTime: 0,
       currentTime: now,
-    })
+    });
   }, []);
 
-  const getValueToDisplay = (): string => convertTimeToString((time.currentTime - time.startTime) + time.elapsedTime);
+  const getValueToDisplay = (): string => (
+    convertTimeToString((time.currentTime - time.startTime) + time.elapsedTime)
+  );
 
   useEffect(() => {
     if (isStarted) {
@@ -63,25 +65,25 @@ const Timer = ({
             ...currentTime,
             startTime: currentTime.startTime === 0 ? now : currentTime.startTime,
             currentTime: now,
-          }
-        })
+          };
+        });
       }, 100);
-    } else {
-      if (interval.current) {
-        clearInterval(interval.current as NodeJS.Timeout);
-        setTime((currentTime) => ({
-          currentTime: 0,
-          startTime: 0,
-          elapsedTime: (performance.now() - currentTime.startTime) + currentTime.elapsedTime,
-        }))
-      }
+    } else if (interval.current) {
+      clearInterval(interval.current as NodeJS.Timeout);
+      setTime((currentTime) => ({
+        currentTime: 0,
+        startTime: 0,
+        elapsedTime: (performance.now() - currentTime.startTime) + currentTime.elapsedTime,
+      }));
     }
-  }, [isStarted])
+  }, [isStarted]);
 
   return (
     <Wrapper>
       <TimerName>
-        This is timer number {timerId}
+        This is timer number
+        {' '}
+        {timerId}
       </TimerName>
       <TimerValue>
         {getValueToDisplay()}

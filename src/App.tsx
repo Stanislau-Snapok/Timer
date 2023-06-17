@@ -1,9 +1,9 @@
-import TimersList from "./components/TimersList";
+import React from 'react';
 
-const App = () => {
-  return (
-    <TimersList />
-  );
-}
+import TimersList from './components/TimersList';
+
+const App = () => (
+  <TimersList />
+);
 
 export default App;
