@@ -6,8 +6,12 @@ import {
 } from "react";
 
 import { convertTimeToString } from "../../utils";
-
-import './Timer.css';
+import {
+  Wrapper,
+  TimerName,
+  TimerValue,
+  ButtonsWrapper,
+} from "./Timer.styled";
 
 interface iTimer {
   onTimerDelete: (event: React.MouseEvent) => void,
@@ -75,17 +79,19 @@ const Timer = ({
   }, [isStarted])
 
   return (
-    <div className="timerWrapper">
-      <div className="timerName">This is timer number {timerId}</div>
-      <div className="timerValue">
+    <Wrapper>
+      <TimerName>
+        This is timer number {timerId}
+      </TimerName>
+      <TimerValue>
         {getValueToDisplay()}
-      </div>
-      <div className="timerButtons">
+      </TimerValue>
+      <ButtonsWrapper>
         <button onClick={handleTimerStateToogle}>Start / Pause</button>
         <button onClick={handleTimerReset}>Reset</button>
         <button onClick={onTimerDelete}>Delete</button>
-      </div>
-    </div>
+      </ButtonsWrapper>
+    </Wrapper>
   );
 };
 
