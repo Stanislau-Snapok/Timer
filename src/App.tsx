@@ -1,6 +1,8 @@
+import TimersList from "./components/TimersList";
+
 const App = () => {
   return (
-    <div>Timer</div>
+    <TimersList />
   );
 }
 
